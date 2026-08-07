@@ -1,0 +1,27 @@
+name: AutoCAB protection test
+
+on:
+  workflow_dispatch:
+    inputs:
+      simulate-failure:
+        description: Simulate a failed deployment
+        required: true
+        type: boolean
+        default: false
+
+jobs:
+  deploy:
+    name: Simulate production deployment
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run simulated deployment
+        env:
+          SIMULATE_FAILURE: ${{ inputs.simulate-failure }}
+        run: |
+          if [[ "$SIMULATE_FAILURE" == "true" ]]; then
+            echo "Simulated deployment failure"
+            exit 1
+          fi
+
+          echo "Deployment started after AutoCAB approval"
