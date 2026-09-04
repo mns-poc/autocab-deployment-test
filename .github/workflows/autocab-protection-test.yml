@@ -1,6 +1,8 @@
 name: AutoCAB protection test
 
 on:
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       simulate-failure:
@@ -24,4 +26,4 @@ jobs:
             exit 1
           fi
 
-          echo "Deployment started after AutoCAB approval"
+          echo "Deployment started after CAB protection approval"
